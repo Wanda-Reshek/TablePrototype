@@ -57,7 +57,7 @@ export default function PrototypePage() {
           <TabGroup tabs={TABS} />
           <button className={styles.columnsBtn}>
             <img src={columnIcon} width={20} height={20} alt="" aria-hidden="true" />
-            <span>5/12</span>
+            <span>15/15</span>
           </button>
         </div>
 
