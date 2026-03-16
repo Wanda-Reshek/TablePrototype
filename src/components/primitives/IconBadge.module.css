@@ -1,0 +1,47 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: var(--radius-md); /* 6px */
+  border: 1px solid transparent;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Pending — amber */
+.pending {
+  background: var(--color-status-pending-issuing-bg);
+  border-color: var(--color-status-pending-issuing-border);
+}
+
+/* Confirmed (Owner's confirmation) — positive green */
+.confirmed {
+  background: var(--color-status-final-draft-bg);
+  border-color: var(--color-status-final-draft-border);
+}
+
+/* Approved — positive green */
+.approved {
+  background: var(--color-status-final-draft-bg);
+  border-color: var(--color-status-final-draft-border);
+}
+
+/* Delegated — neutral olive */
+.delegated {
+  background: var(--color-icon-badge-neutral-bg);
+  border-color: var(--color-icon-badge-neutral-border);
+}
+
+/* Pending approval — same amber as pending */
+.pending-approval {
+  background: var(--color-status-pending-issuing-bg);
+  border-color: var(--color-status-pending-issuing-border);
+}

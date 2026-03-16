@@ -1,0 +1,58 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tooltip — portalled to body, positioned above the button */
+.tooltipPortal {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+
+/* Legacy in-table tooltip (kept for non-portalled contexts) */
+.tooltipWrap {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  /* prevent the tooltip box from constraining to the narrow button width */
+  width: max-content;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-btn-secondary-border);
+  background: var(--color-surface-panel);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--easing-default);
+}
+
+.button:hover {
+  background: var(--color-btn-secondary-hover-bg);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}

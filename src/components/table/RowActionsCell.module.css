@@ -1,0 +1,65 @@
+/* The actions wrapper — hidden by default, revealed on tr hover via parent CSS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* ── More button ── */
+.moreWrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tooltip above the More button — portalled to body */
+.tooltipPortal {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+
+/* Legacy in-table tooltip (unused, kept for reference) */
+.tooltipWrap {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  pointer-events: none;
+  width: max-content;
+}
+
+.moreBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--color-btn-secondary-border);
+  border-radius: 8px;
+  background: var(--color-surface-panel);
+  cursor: pointer;
+  transition: background 80ms ease;
+}
+
+.moreBtn:hover,
+.moreBtnActive {
+  background: rgba(104, 105, 91, 0.08);
+}
+
+/* ── Portal dropdown ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+}
+
+.dropdownPortal {
+  position: fixed;
+  z-index: 200;
+}

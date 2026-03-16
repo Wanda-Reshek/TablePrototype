@@ -1,8 +1,8 @@
-import DataTableScreen from './DataTableScreen';
+import PrototypePage from './PrototypePage';
 
 export default {
   title: 'Screens/DataTable',
-  component: DataTableScreen,
+  component: PrototypePage,
   parameters: {
     layout: 'fullscreen',
   },

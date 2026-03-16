@@ -1,0 +1,81 @@
+/* Outer wrapper — stacks box + arrow in the right direction */
+.tooltip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* arrow below → tooltip appears above trigger */
+.top {
+  flex-direction: column;
+  align-items: center;
+}
+
+/* arrow above → tooltip appears below trigger */
+.bottom {
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+/* arrow to the right → tooltip appears to the left of trigger */
+.left {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* arrow to the left → tooltip appears to the right of trigger */
+.right {
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+/* The dark pill */
+.box {
+  background: var(--color-tooltip-bg);
+  color: var(--color-tooltip-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base); /* 14px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  padding: 12px;
+  border-radius: var(--radius-sm); /* 4px */
+  max-width: 240px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-tooltip);
+}
+
+/* Arrow caret — changes shape & size based on placement */
+.arrow {
+  background: var(--color-tooltip-bg);
+  flex-shrink: 0;
+}
+
+/* ▼ pointing down (tooltip is above trigger) */
+.top .arrow {
+  width: 14px;
+  height: 7px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* ▲ pointing up (tooltip is below trigger) */
+.bottom .arrow {
+  width: 14px;
+  height: 7px;
+  clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+}
+
+/* ► pointing right (tooltip is to the left of trigger) */
+.left .arrow {
+  width: 7px;
+  height: 14px;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+
+/* ◄ pointing left (tooltip is to the right of trigger) */
+.right .arrow {
+  width: 7px;
+  height: 14px;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}

@@ -1,0 +1,28 @@
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.date {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: #68695b;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+  white-space: nowrap;
+}

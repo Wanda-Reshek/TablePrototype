@@ -1,44 +1,183 @@
 .screen {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 16px;
 }
 
 .toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .toolbarGroup {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
-.placeholder {
-  border: 2px dashed var(--color-gray-300);
-  border-radius: var(--radius-lg);
-  padding: var(--space-12) var(--space-8);
+/* ── Table shell ── */
+.tableWrapper {
+  width: max-content;
+  min-width: 100%;
+  border: 1px solid rgba(104, 105, 91, 0.15);
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+  table-layout: fixed;
+}
+
+/* ── Header — thin structural wrapper, ColumnHeader owns all visuals ── */
+.th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  /* fallback bg keeps sticky rows from showing through at 1px seams */
+  background: #f2f3ec;
+  padding: 0;
+  border-bottom: 1px solid rgba(104, 105, 91, 0.15);
+  /* needed so the resize handle positions relative to the th */
+  overflow: visible;
+}
+
+/* Resize handle — sits at the right edge of the <th>, above everything */
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  background: transparent;
+  transition: background 80ms ease;
+  z-index: 2;
+  transform: translateX(50%);
+}
+
+.th:hover .resizeHandle {
+  background: rgba(104, 105, 91, 0.25);
+}
+
+.resizeHandleActive {
+  background: rgba(104, 105, 91, 0.55) !important;
+}
+
+/* Actions column header — sticky top-right, zero-width */
+.thActions {
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 11;
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  overflow: visible;
+  background: #f2f3ec;
+  border-bottom: 1px solid rgba(104, 105, 91, 0.15);
+}
+
+/* ── Rows ── */
+.tr {
+  position: relative;
+  border-bottom: 1px solid rgba(104, 105, 91, 0.1);
+  transition: background 80ms ease;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.tr:hover {
+  background: #F2F3EC;
+}
+
+.td {
+  padding: 0 16px;
+  height: 62px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.paginationRow {
+  position: sticky;
+  left: 0;
+}
+
+/* Reserve 160px at the right edge of the table for the actions overlay */
+.tr > td:nth-last-child(2) {
+  padding-right: 160px;
+}
+
+/* ── Actions column cell ──────────────────────────────────────── */
+.tdActions {
+  position: sticky;
+  right: 0;
+  width: 0;
+  min-width: 0;
+  max-width: 0;
+  padding: 0;
+  overflow: visible;
+  vertical-align: middle;
+  /* background so sticky cell covers scrolled content behind it */
+  background: transparent;
+}
+
+/* The visible overlay: floats 160px wide from the sticky right edge */
+.actionsOverlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 160px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--color-gray-400);
-  gap: var(--space-2);
+  justify-content: flex-end;
+  padding-right: 8px;
+  background: transparent;
+  transition: background 80ms ease;
 }
 
-.placeholderIcon {
-  font-size: 2rem;
+/* Show gradient + buttons on row hover */
+.tr:hover .actionsOverlay {
+  background: linear-gradient(90deg, rgba(242, 243, 236, 0.00) 0%, #F2F3EC 14.9%);
 }
 
-.placeholderTitle {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-gray-600);
+/* Hide buttons until row is hovered */
+.tr .actionsOverlay > * {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 100ms ease;
 }
 
-.placeholderHint {
-  font-size: var(--font-size-sm);
+.tr:hover .actionsOverlay > * {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep row in hover state while the More dropdown is open */
+.tr:has([data-menu-open]) .actionsOverlay {
+  background: linear-gradient(90deg, rgba(242, 243, 236, 0.00) 0%, #F2F3EC 14.9%);
+}
+
+.tr:has([data-menu-open]) .actionsOverlay > * {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tr:has([data-menu-open]) {
+  background: #F2F3EC;
 }

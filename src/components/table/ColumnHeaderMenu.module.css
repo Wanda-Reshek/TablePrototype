@@ -1,0 +1,108 @@
+.menu {
+  position: fixed;
+  z-index: 200;
+  width: 254px;
+  background: #ffffff;
+  border: 1px solid #e1e2db;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+}
+
+/* ── Search ── */
+.searchWrapper {
+  padding: 8px;
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(104, 105, 91, 0.2);
+  border-radius: 8px;
+  cursor: text;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+}
+
+.searchInput::placeholder {
+  color: #68695b;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 80ms ease, background 80ms ease;
+}
+
+.clearBtn:hover {
+  opacity: 1;
+  background: rgba(104, 105, 91, 0.1);
+}
+
+/* ── Sort items ── */
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 80ms ease;
+}
+
+.item:hover {
+  background: rgba(104, 105, 91, 0.06);
+}
+
+.itemIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: opacity 100ms ease;
+}
+
+.iconHidden {
+  opacity: 0;
+}
+
+.itemLabel {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+}

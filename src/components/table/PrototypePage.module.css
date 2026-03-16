@@ -1,0 +1,98 @@
+/* ── Shell ──────────────────────────────────────────────── */
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Main content area ──────────────────────────────────── */
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: var(--color-surface-app);
+}
+
+/* ── Page header ────────────────────────────────────────── */
+.pageHeader {
+  position: sticky;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  flex-shrink: 0;
+  background: #FAFAF8;
+}
+
+.pageTitle {
+  font-family: var(--font-family-sans);
+  font-size: 20px;
+  font-weight: 600;
+  color: #203209;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.helpBtn {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.helpBtn:hover {
+  background: rgba(104, 105, 91, 0.08);
+}
+
+/* ── Tabs bar ───────────────────────────────────────────── */
+.tabsBar {
+  position: sticky;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  flex-shrink: 0;
+  background: #FAFAF8;
+}
+
+/* ── Columns button ─────────────────────────────────────── */
+.columnsBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid rgba(104, 105, 91, 0.2);
+  border-radius: 8px;
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  cursor: pointer;
+  transition: background 80ms ease;
+}
+
+.columnsBtn:hover {
+  background: rgba(104, 105, 91, 0.05);
+}
+
+/* ── Table area ─────────────────────────────────────────── */
+.tableArea {
+  padding: 16px 24px 24px;
+}

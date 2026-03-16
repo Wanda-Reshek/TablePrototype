@@ -1,0 +1,39 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm); /* 4px */
+  border: 1px solid transparent;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base); /* 14px */
+  font-weight: var(--font-weight-regular);
+  line-height: 20px;
+  letter-spacing: var(--letter-spacing-tight); /* -0.15px */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drafted {
+  background: var(--color-status-drafted-bg);
+  border-color: var(--color-status-drafted-border);
+  color: var(--color-status-drafted-text);
+}
+
+.final-draft {
+  background: var(--color-status-final-draft-bg);
+  border-color: var(--color-status-final-draft-border);
+  color: var(--color-status-final-draft-text);
+}
+
+.drafting {
+  background: var(--color-status-drafting-bg);
+  border-color: var(--color-status-drafting-border);
+  color: var(--color-status-drafting-text);
+}
+
+.pending-issuing {
+  background: var(--color-status-pending-issuing-bg);
+  border-color: var(--color-status-pending-issuing-border);
+  color: var(--color-status-pending-issuing-text);
+}

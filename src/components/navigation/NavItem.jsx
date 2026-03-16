@@ -9,14 +9,15 @@ import styles from './NavItem.module.css';
  * but does NOT change its own background — the parent NavCategory
  * handles that.
  */
-export default function NavItem({ label, selected = false, onClick }) {
+export default function NavItem({ label, selected = false, onClick, count }) {
   return (
     <button
       className={`${styles.item} ${selected ? styles.selected : ''}`}
       onClick={onClick}
       aria-current={selected ? 'page' : undefined}
     >
-      {label}
+      <span className={styles.label}>{label}</span>
+      {count != null && <span className={styles.count}>{count}</span>}
     </button>
   );
 }

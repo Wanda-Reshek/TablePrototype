@@ -23,6 +23,12 @@ const TRANSPORT_ITEMS = [
   "Private Mate's Receipt",
 ];
 
+// Static counts shown next to specific nav items
+const NAV_COUNTS = {
+  'BIMCO eBL Congenbill': 17,
+  "Private Mate's Receipt": 2,
+};
+
 const RISK_ITEMS = [
   'LOI no BL at POD',
   'E-Letter of Authority',
@@ -42,7 +48,8 @@ function SwitchIcon() {
 }
 
 /** Shared nav content — used in both the collapsed strip and the expanded panel */
-function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse }) {
+function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse, activeNavItem }) {
+  const transportActive = TRANSPORT_ITEMS.includes(activeNavItem);
   return (
     <>
       <div className={styles.body}>
@@ -53,8 +60,13 @@ function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse }) {
           <SidebarEntry icon={<IntegrationsIcon />} label="Integrations" sidebarCollapsed={sidebarCollapsed}>
             <NavItem label="Bookings" />
           </SidebarEntry>
-          <SidebarEntry icon={<TransportDocumentsIcon />} label="Transport Documents" sidebarCollapsed={sidebarCollapsed}>
-            {TRANSPORT_ITEMS.map((l) => <NavItem key={l} label={l} />)}
+          <SidebarEntry icon={<TransportDocumentsIcon />} label="Transport Documents"
+            active={transportActive}
+            defaultExpanded={transportActive}
+            sidebarCollapsed={sidebarCollapsed}>
+            {TRANSPORT_ITEMS.map((l) => (
+              <NavItem key={l} label={l} selected={l === activeNavItem} count={NAV_COUNTS[l]} />
+            ))}
           </SidebarEntry>
           <SidebarEntry icon={<RiskManagementIcon />} label="Risk Management" sidebarCollapsed={sidebarCollapsed}>
             {RISK_ITEMS.map((l) => <NavItem key={l} label={l} />)}
@@ -89,7 +101,7 @@ function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse }) {
   );
 }
 
-export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Chemicals' }) {
+export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Chemicals', activeNavItem }) {
   const [hovered, setHovered] = useState(false);
   const popoverVisible = !pinned && hovered;
 
@@ -104,7 +116,7 @@ export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Ch
         <div className={`${styles.header} ${styles.headerCollapsed}`}>
           <img src={logoCollapsed} alt="Secro" className={styles.logoImg} draggable={false} />
         </div>
-        <NavContent sidebarCollapsed={true} pinned={pinned} onPin={onPin} onCollapse={onCollapse} />
+        <NavContent sidebarCollapsed={true} pinned={pinned} onPin={onPin} onCollapse={onCollapse} activeNavItem={activeNavItem} />
       </aside>
 
       {/* ── Expanded panel: popover (floats) or pinned (part of layout) ── */}
@@ -124,7 +136,7 @@ export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Ch
             <SwitchIcon />
           </button>
         </div>
-        <NavContent sidebarCollapsed={false} pinned={pinned} onPin={onPin} onCollapse={onCollapse} />
+        <NavContent sidebarCollapsed={false} pinned={pinned} onPin={onPin} onCollapse={onCollapse} activeNavItem={activeNavItem} />
       </aside>
     </div>
   );

@@ -1,0 +1,107 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+}
+
+/* ── Left: "Show 50 ▾" ── */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  /* inherits from .pagination */
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  border: 1px solid var(--color-btn-secondary-border);
+  border-radius: 8px;
+  background: transparent;
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  height: 100%;
+  padding: 0 32px 0 12px; /* 12px left, room for chevron right */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: #203209;
+  letter-spacing: -0.15px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+/* ── Right: "1–50 of 763  ‹  ›" ── */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rangeText {
+  /* inherits from .pagination */
+}
+
+.navButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.navBtn {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-btn-secondary-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.navBtn:hover:not(:disabled) {
+  background: var(--color-btn-secondary-hover-bg);
+}
+
+.navBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.prevIcon {
+  width: 20px;
+  height: 20px;
+  transform: rotate(90deg);
+}
+
+.nextIcon {
+  width: 20px;
+  height: 20px;
+  transform: rotate(-90deg);
+}

@@ -1,44 +1,104 @@
-/**
- * Mock dataset — sample rows for the data table prototype.
- * Each row represents a fictional transaction/record.
- * Extend or replace this data as needed.
- */
-
-const STATUSES = ['Active', 'Pending', 'Completed', 'Failed', 'Cancelled'];
-const CATEGORIES = ['Finance', 'Operations', 'Marketing', 'Engineering', 'Sales'];
-const REGIONS = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East'];
-
-function randomFrom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function randomDate(start, end) {
-  const d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  return d.toISOString().split('T')[0];
-}
-
-function generateRows(count = 50) {
-  return Array.from({ length: count }, (_, i) => ({
-    id: `TXN-${String(i + 1).padStart(4, '0')}`,
-    name: `Record ${i + 1}`,
-    status: randomFrom(STATUSES),
-    category: randomFrom(CATEGORIES),
-    region: randomFrom(REGIONS),
-    amount: Math.round(Math.random() * 100000) / 100,
-    date: randomDate(new Date('2025-01-01'), new Date('2026-03-15')),
-    assignee: `User ${Math.floor(Math.random() * 12) + 1}`,
-  }));
-}
+import { createElement } from 'react';
+import Badge from '../components/primitives/Badge';
+import IconBadgeCell from '../components/table/IconBadgeCell';
+import DateCell from '../components/table/DateCell';
+import Chip from '../components/primitives/Chip';
+import RowActionsCell from '../components/table/RowActionsCell';
+import attachmentsIcon from '../Icons/Attachments.svg';
 
 export const mockColumns = [
-  { id: 'id', header: 'ID', accessorKey: 'id' },
-  { id: 'name', header: 'Name', accessorKey: 'name' },
-  { id: 'status', header: 'Status', accessorKey: 'status' },
-  { id: 'category', header: 'Category', accessorKey: 'category' },
-  { id: 'region', header: 'Region', accessorKey: 'region' },
-  { id: 'amount', header: 'Amount', accessorKey: 'amount' },
-  { id: 'date', header: 'Date', accessorKey: 'date' },
-  { id: 'assignee', header: 'Assignee', accessorKey: 'assignee' },
+  {
+    id: 'created', header: 'Created', accessorKey: 'created', size: 120, minSize: 80,
+    cell: ({ getValue }) => createElement(DateCell, { value: getValue() }),
+  },
+  { id: 'docId',    header: 'Doc ID',    accessorKey: 'docId',    size: 79,  minSize: 60 },
+  {
+    id: 'attachments', header: 'Attachment', accessorKey: 'attachments', size: 116, minSize: 60,
+    cell: ({ getValue }) => {
+      const count = getValue();
+      if (!count) return null;
+      return createElement(Chip, {
+        icon: createElement('img', { src: attachmentsIcon, width: 14, height: 14, alt: '', 'aria-hidden': true }),
+      }, String(count));
+    },
+  },
+  { id: 'type',     header: 'Type',      accessorKey: 'type',     size: 79,  minSize: 60 },
+  { id: 'blNumber', header: 'BL number', accessorKey: 'blNumber', size: 139, minSize: 80 },
+  {
+    id: 'docStatus', header: 'Doc status', accessorKey: 'docStatus', size: 158, minSize: 80,
+    cell: ({ getValue }) => createElement(Badge, { variant: getValue() }),
+  },
+  {
+    id: 'ownerAction', header: 'Owner action status', accessorKey: 'ownerAction', size: 211, minSize: 120,
+    cell: ({ getValue }) => { const v = getValue(); return v ? createElement(IconBadgeCell, { variant: v }) : null; },
+  },
+  {
+    id: 'approvalStatus', header: 'Owner action status', accessorKey: 'approvalStatus', size: 211, minSize: 120,
+    cell: ({ getValue }) => { const v = getValue(); return v ? createElement(IconBadgeCell, { variant: v }) : null; },
+  },
+  { id: 'goodsName',   header: 'Goods name',           accessorKey: 'goodsName',   size: 139, minSize: 80  },
+  { id: 'vessel',      header: 'Vessel',                accessorKey: 'vessel',      size: 196, minSize: 100 },
+  { id: 'pol',         header: 'PoL',                   accessorKey: 'pol',         size: 139, minSize: 60  },
+  { id: 'pod',         header: 'PoD',                   accessorKey: 'pod',         size: 139, minSize: 60  },
+  { id: 'shipper',     header: 'Shipper',               accessorKey: 'shipper',     size: 139, minSize: 80  },
+  { id: 'buyer',       header: 'Buyer',                 accessorKey: 'buyer',       size: 139, minSize: 80  },
+  { id: 'description', header: 'Description of goods',  accessorKey: 'description', size: 188, minSize: 100 },
+  {
+    id: '_actions', header: '', accessorKey: 'blNumber',
+    enableSorting: false, enableResizing: false, size: 0,
+    cell: ({ row }) => createElement(RowActionsCell, { row }),
+  },
 ];
 
-export const mockData = generateRows(50);
+export const mockData = [
+  { created: '2024-01-06T13:00:00Z', docId: 253, attachments: 1, type: 'Electronic', blNumber: 'MSCU7489321', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: 'pending-approval', goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Baltic Crop Solutions', description: 'UAN 28% Nitrogen Fertilizer'          },
+  { created: '2024-01-07T14:00:00Z', docId: 736, attachments: 1, type: 'Electronic', blNumber: 'MAEU7654321', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Vistula Agro Trading',  description: 'UAN 30% Nitrogen Fertilizer'          },
+  { created: '2024-01-08T15:00:00Z', docId: 847, attachments: 2, type: 'Electronic', blNumber: 'SEAU1234567', docStatus: 'drafting',        ownerAction: null,         approvalStatus: 'approved',         goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Baltic Crop Solutions', description: 'UAN 28% Nitrogen Fertilizer'          },
+  { created: '2024-01-09T16:00:00Z', docId: 129, attachments: 0, type: 'Electronic', blNumber: 'TCLU9876543', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: null,               goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Vistula Agro Trading',  description: 'UAN 30% Nitrogen Fertilizer'          },
+  { created: '2024-01-10T17:00:00Z', docId: 564, attachments: 4, type: 'Electronic', blNumber: 'DRUA4567890', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Vistula Agro Trading',  description: 'UAN 30% Nitrogen Fertilizer'          },
+  { created: '2024-01-11T18:00:00Z', docId: 902, attachments: 0, type: 'Electronic', blNumber: 'CMAU2345678', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: null,               goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Baltic Crop Solutions', description: 'UAN 28% Nitrogen Fertilizer'          },
+  { created: '2024-01-12T20:00:00Z', docId: 413, attachments: 0, type: 'Electronic', blNumber: 'FSCU3456789', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: null,               goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Baltic Crop Solutions', description: 'UAN 28% Nitrogen Fertilizer'          },
+  { created: '2024-01-13T20:00:00Z', docId: 675, attachments: 3, type: 'Electronic', blNumber: 'LCSU8765432', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: 'pending-approval', goodsName: 'Urea ammonium nitrate',   vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Baltic Crop Solutions', description: 'UAN 28% Nitrogen Fertilizer'          },
+  { created: '2024-01-15T09:00:00Z', docId: 318, attachments: 2, type: 'Electronic', blNumber: 'HLCU3847291', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Diammonium phosphate',    vessel: 'MV CORONA AUSTRAL',  pol: 'Rotterdam',    pod: 'Santos',       shipper: 'EuroFert Manufacturing', buyer: 'Pampas Grain Corp',     description: 'DAP 18-46-0 Fertilizer'              },
+  { created: '2024-01-17T11:00:00Z', docId: 491, attachments: 0, type: 'Electronic', blNumber: 'EVGU9182736', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Monoammonium phosphate',  vessel: 'MV CORONA AUSTRAL',  pol: 'Rotterdam',    pod: 'Paranagua',    shipper: 'Baltic Fertilizers AS',  buyer: 'Pampas Grain Corp',     description: 'MAP 11-52-0 Fertilizer'              },
+  { created: '2024-01-19T14:00:00Z', docId: 827, attachments: 1, type: 'Electronic', blNumber: 'OOLU4521876', docStatus: 'final-draft',     ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Potassium chloride',      vessel: 'BV NORDIC PEARL',    pol: 'Hamburg',      pod: 'Buenos Aires', shipper: 'Nordic Agro Chemical',   buyer: 'Vistula Agro Trading',  description: 'Muriate of Potash MOP 60%'            },
+  { created: '2024-01-22T10:00:00Z', docId: 155, attachments: 5, type: 'Electronic', blNumber: 'YMLU8374625', docStatus: 'pending-issuing', ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Ammonium sulfate',        vessel: 'BV NORDIC PEARL',    pol: 'Hamburg',      pod: 'Santos',       shipper: 'EuroFert Manufacturing', buyer: 'Delta Agro Investment',  description: 'Ammonium Sulphate 21% N'              },
+  { created: '2024-01-24T15:00:00Z', docId: 634, attachments: 0, type: 'Electronic', blNumber: 'CMAU1928374', docStatus: 'drafted',        ownerAction: null,         approvalStatus: null,               goodsName: 'Urea granular 46%',       vessel: 'MV ARCTIC TRADER',   pol: 'Constanta',    pod: 'Buenos Aires', shipper: 'Gulf Agrochem Ltd',      buyer: 'Cerealista del Mar',    description: 'Urea Granular 46% N'                  },
+  { created: '2024-01-26T16:00:00Z', docId: 788, attachments: 3, type: 'Electronic', blNumber: 'MSCU2847365', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'pending-approval', goodsName: 'NPK fertilizer',          vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Santos',       shipper: 'AgriNitro Chemicals',   buyer: 'Pampas Grain Corp',     description: 'NPK 15-15-15 Fertilizer'              },
+  { created: '2024-01-28T13:00:00Z', docId: 201, attachments: 1, type: 'Electronic', blNumber: 'MAEU4736251', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Liquid ammonia',          vessel: 'MT NORSE SPIRIT',    pol: 'Novorossiysk', pod: 'Mumbai',       shipper: 'Baltic Fertilizers AS',  buyer: 'Southern Harvest Ltd',  description: 'Anhydrous Ammonia 99.5%'              },
+  { created: '2024-01-30T11:00:00Z', docId: 947, attachments: 6, type: 'Electronic', blNumber: 'HLCU5619283', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Diammonium phosphate',    vessel: 'MV ATLANTIC HAWK',   pol: 'Houston',      pod: 'Buenos Aires', shipper: 'Gulf Agrochem Ltd',      buyer: 'Baltic Crop Solutions', description: 'DAP 18-46-0 Fertilizer'              },
+  { created: '2024-02-02T09:00:00Z', docId: 362, attachments: 0, type: 'Electronic', blNumber: 'EVGU7382910', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: null,               goodsName: 'Urea ammonium nitrate',   vessel: 'BV STELLAR CROWN',   pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Vistula Agro Trading',  description: 'UAN 32% Nitrogen Fertilizer'          },
+  { created: '2024-02-05T14:00:00Z', docId: 519, attachments: 2, type: 'Electronic', blNumber: 'OOLU1736482', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Potassium chloride',      vessel: 'BV STELLAR CROWN',   pol: 'Hamburg',      pod: 'Paranagua',    shipper: 'Nordic Agro Chemical',   buyer: 'Pampas Grain Corp',     description: 'Muriate of Potash MOP 62%'            },
+  { created: '2024-02-07T10:00:00Z', docId: 873, attachments: 1, type: 'Electronic', blNumber: 'YMLU2938475', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Monoammonium phosphate',  vessel: 'MT POLAR WAVE',      pol: 'Le Havre',     pod: 'Buenos Aires', shipper: 'Iberian Agroproducts',   buyer: 'Cerealista del Mar',    description: 'MAP 11-52-0 Fertilizer'              },
+  { created: '2024-02-10T16:00:00Z', docId: 441, attachments: 4, type: 'Electronic', blNumber: 'CMAU8473621', docStatus: 'pending-issuing', ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'NPK fertilizer',          vessel: 'MT POLAR WAVE',      pol: 'Antwerp',      pod: 'Lagos',        shipper: 'EuroFert Manufacturing', buyer: 'Delta Agro Investment',  description: 'NPK 20-20-20 Fertilizer'              },
+  { created: '2024-02-13T12:00:00Z', docId: 680, attachments: 0, type: 'Electronic', blNumber: 'MSCU3847102', docStatus: 'drafted',        ownerAction: null,         approvalStatus: null,               goodsName: 'Urea granular 46%',       vessel: 'MV CORONA AUSTRAL',  pol: 'Santos',       pod: 'Rotterdam',    shipper: 'Gulf Agrochem Ltd',      buyer: 'Baltic Crop Solutions', description: 'Urea Prilled 46% N'                   },
+  { created: '2024-02-16T15:00:00Z', docId: 324, attachments: 2, type: 'Electronic', blNumber: 'MAEU6294738', docStatus: 'final-draft',     ownerAction: 'delegated',  approvalStatus: 'pending-approval', goodsName: 'Ammonium sulfate',        vessel: 'MV ARCTIC TRADER',   pol: 'Rotterdam',    pod: 'Santos',       shipper: 'Baltic Fertilizers AS',  buyer: 'Vistula Agro Trading',  description: 'Ammonium Sulphate Crystal 21%'        },
+  { created: '2024-02-19T11:00:00Z', docId: 758, attachments: 1, type: 'Paper',      blNumber: 'HLCU9283746', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Potassium chloride',      vessel: 'BV NORDIC PEARL',    pol: 'Hamburg',      pod: 'Durban',       shipper: 'Nordic Agro Chemical',   buyer: 'Southern Harvest Ltd',  description: 'Standard Grade Potash MOP'            },
+  { created: '2024-02-22T13:00:00Z', docId: 537, attachments: 0, type: 'Electronic', blNumber: 'EVGU4817362', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Diammonium phosphate',    vessel: 'MV ATLANTIC HAWK',   pol: 'Houston',      pod: 'Santos',       shipper: 'Gulf Agrochem Ltd',      buyer: 'Pampas Grain Corp',     description: 'DAP Granular 18-46-0'                 },
+  { created: '2024-02-25T16:00:00Z', docId: 195, attachments: 3, type: 'Electronic', blNumber: 'OOLU3726481', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Urea ammonium nitrate',   vessel: 'MT NORSE SPIRIT',    pol: 'Novorossiysk', pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Delta Agro Investment',  description: 'UAN Solution 28% N'                   },
+  { created: '2024-02-28T10:00:00Z', docId: 843, attachments: 7, type: 'Electronic', blNumber: 'YMLU1836472', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: null,               goodsName: 'NPK fertilizer',          vessel: 'BV STELLAR CROWN',   pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Baltic Crop Solutions', description: 'NPK 10-26-26 Fertilizer'              },
+  { created: '2024-03-04T14:00:00Z', docId: 467, attachments: 0, type: 'Electronic', blNumber: 'CMAU7263819', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: 'pending-approval', goodsName: 'Liquid ammonia',          vessel: 'MT POLAR WAVE',      pol: 'Constanta',    pod: 'Mumbai',       shipper: 'Baltic Fertilizers AS',  buyer: 'Cerealista del Mar',    description: 'Anhydrous Ammonia Refrigerated'       },
+  { created: '2024-03-07T09:00:00Z', docId: 612, attachments: 1, type: 'Paper',      blNumber: 'MSCU4928371', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Monoammonium phosphate',  vessel: 'MV CORONA AUSTRAL',  pol: 'Rotterdam',    pod: 'Buenos Aires', shipper: 'Iberian Agroproducts',   buyer: 'Vistula Agro Trading',  description: 'MAP Technical Grade 12-61-0'          },
+  { created: '2024-03-11T13:00:00Z', docId: 279, attachments: 5, type: 'Electronic', blNumber: 'MAEU8364729', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Urea granular 46%',       vessel: 'MV ARCTIC TRADER',   pol: 'Hamburg',      pod: 'Paranagua',    shipper: 'Nordic Agro Chemical',   buyer: 'Pampas Grain Corp',     description: 'Granular Urea 46% N Premium'          },
+  { created: '2024-03-14T15:00:00Z', docId: 731, attachments: 0, type: 'Electronic', blNumber: 'HLCU2847163', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Ammonium sulfate',        vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Santos',       shipper: 'AgriNitro Chemicals',     buyer: 'Southern Harvest Ltd',  description: 'Ammonium Sulphate Granular'           },
+  { created: '2024-03-17T11:00:00Z', docId: 384, attachments: 2, type: 'Electronic', blNumber: 'EVGU6183924', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Potassium chloride',      vessel: 'BV NORDIC PEARL',    pol: 'Hamburg',      pod: 'Buenos Aires', shipper: 'Nordic Agro Chemical',   buyer: 'Baltic Crop Solutions', description: 'Potash Chloride Standard Grade'       },
+  { created: '2024-03-20T16:00:00Z', docId: 956, attachments: 1, type: 'Electronic', blNumber: 'OOLU5273819', docStatus: 'drafted',        ownerAction: null,         approvalStatus: null,               goodsName: 'NPK fertilizer',          vessel: 'MV ATLANTIC HAWK',   pol: 'Le Havre',     pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Delta Agro Investment',  description: 'NPK Compound 13-13-21'                },
+  { created: '2024-03-23T10:00:00Z', docId: 148, attachments: 3, type: 'Electronic', blNumber: 'YMLU9183742', docStatus: 'pending-issuing', ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Diammonium phosphate',    vessel: 'BV STELLAR CROWN',   pol: 'Antwerp',      pod: 'Lagos',        shipper: 'Gulf Agrochem Ltd',      buyer: 'Cerealista del Mar',    description: 'DAP Standard Grade 18-46-0'           },
+  { created: '2024-03-26T14:00:00Z', docId: 593, attachments: 0, type: 'Electronic', blNumber: 'CMAU3847291', docStatus: 'final-draft',     ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Urea ammonium nitrate',   vessel: 'MT NORSE SPIRIT',    pol: 'Novorossiysk', pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Pampas Grain Corp',     description: 'UAN 30% Liquid Fertilizer'            },
+  { created: '2024-04-01T09:00:00Z', docId: 826, attachments: 4, type: 'Paper',      blNumber: 'MSCU1748362', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Liquid ammonia',          vessel: 'MT POLAR WAVE',      pol: 'Houston',      pod: 'Durban',       shipper: 'Baltic Fertilizers AS',  buyer: 'Southern Harvest Ltd',  description: 'Liquid Ammonia Bulk Cargo'            },
+  { created: '2024-04-04T13:00:00Z', docId: 475, attachments: 1, type: 'Electronic', blNumber: 'MAEU3928461', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'pending-approval', goodsName: 'Monoammonium phosphate',  vessel: 'MV CORONA AUSTRAL',  pol: 'Rotterdam',    pod: 'Santos',       shipper: 'Iberian Agroproducts',   buyer: 'Vistula Agro Trading',  description: 'MAP Industrial Grade 11-52-0'         },
+  { created: '2024-04-08T15:00:00Z', docId: 308, attachments: 2, type: 'Electronic', blNumber: 'HLCU7263845', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Urea granular 46%',       vessel: 'MV ARCTIC TRADER',   pol: 'Santos',       pod: 'Hamburg',      shipper: 'Gulf Agrochem Ltd',      buyer: 'Baltic Crop Solutions', description: 'Prilled Urea Technical Grade'         },
+  { created: '2024-04-11T11:00:00Z', docId: 741, attachments: 0, type: 'Electronic', blNumber: 'EVGU2837461', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: null,               goodsName: 'Ammonium sulfate',        vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Delta Agro Investment',  description: 'Ammonium Sulphate 21% N Tech'         },
+  { created: '2024-04-15T16:00:00Z', docId: 529, attachments: 6, type: 'Electronic', blNumber: 'OOLU8374612', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Potassium chloride',      vessel: 'BV NORDIC PEARL',    pol: 'Hamburg',      pod: 'Santos',       shipper: 'Nordic Agro Chemical',   buyer: 'Pampas Grain Corp',     description: 'MOP Coarse Grade Fertilizer'          },
+  { created: '2024-04-18T10:00:00Z', docId: 187, attachments: 0, type: 'Electronic', blNumber: 'YMLU5183726', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'NPK fertilizer',          vessel: 'MV ATLANTIC HAWK',   pol: 'Le Havre',     pod: 'Paranagua',    shipper: 'AgriNitro Chemicals',   buyer: 'Cerealista del Mar',    description: 'NPK 15-15-15 Blended Fert'            },
+  { created: '2024-04-22T13:00:00Z', docId: 664, attachments: 3, type: 'Electronic', blNumber: 'CMAU5829374', docStatus: 'pending-issuing', ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Diammonium phosphate',    vessel: 'BV STELLAR CROWN',   pol: 'Rotterdam',    pod: 'Buenos Aires', shipper: 'EuroFert Manufacturing', buyer: 'Southern Harvest Ltd',  description: 'DAP Premium Grade'                    },
+  { created: '2024-04-25T15:00:00Z', docId: 913, attachments: 1, type: 'Paper',      blNumber: 'MSCU6291837', docStatus: 'final-draft',     ownerAction: 'delegated',  approvalStatus: null,               goodsName: 'Urea ammonium nitrate',   vessel: 'MT NORSE SPIRIT',    pol: 'Constanta',    pod: 'Mumbai',       shipper: 'Baltic Fertilizers AS',  buyer: 'Vistula Agro Trading',  description: 'UAN Solution 32% Nitrogen'            },
+  { created: '2024-04-29T09:00:00Z', docId: 852, attachments: 2, type: 'Electronic', blNumber: 'MAEU1847362', docStatus: 'drafted',        ownerAction: null,         approvalStatus: null,               goodsName: 'Liquid ammonia',          vessel: 'MT POLAR WAVE',      pol: 'Houston',      pod: 'Buenos Aires', shipper: 'Gulf Agrochem Ltd',      buyer: 'Baltic Crop Solutions', description: 'Anhydrous Ammonia R-717'              },
+  { created: '2024-05-03T11:00:00Z', docId: 374, attachments: 4, type: 'Electronic', blNumber: 'HLCU4729183', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Monoammonium phosphate',  vessel: 'MV CORONA AUSTRAL',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'Iberian Agroproducts',   buyer: 'Pampas Grain Corp',     description: 'MAP Feed Grade 11-52-0'               },
+  { created: '2024-05-07T14:00:00Z', docId: 621, attachments: 0, type: 'Electronic', blNumber: 'EVGU8192734', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Urea granular 46%',       vessel: 'MV ARCTIC TRADER',   pol: 'Hamburg',      pod: 'Santos',       shipper: 'Nordic Agro Chemical',   buyer: 'Delta Agro Investment',  description: 'Urea Standard 46% N Granular'         },
+  { created: '2024-05-11T16:00:00Z', docId: 288, attachments: 1, type: 'Electronic', blNumber: 'OOLU7384612', docStatus: 'drafted',        ownerAction: 'pending',    approvalStatus: 'pending-approval', goodsName: 'NPK fertilizer',          vessel: 'MT BALTIC MONARCH',  pol: 'Antwerp',      pod: 'Buenos Aires', shipper: 'AgriNitro Chemicals',   buyer: 'Cerealista del Mar',    description: 'NPK Straight Grade 27-0-0'            },
+  { created: '2024-05-14T10:00:00Z', docId: 537, attachments: 0, type: 'Electronic', blNumber: 'YMLU3849201', docStatus: 'drafting',        ownerAction: null,         approvalStatus: null,               goodsName: 'Ammonium sulfate',        vessel: 'BV NORDIC PEARL',    pol: 'Le Havre',     pod: 'Paranagua',    shipper: 'EuroFert Manufacturing', buyer: 'Southern Harvest Ltd',  description: 'Ammonium Sulphate Agricultural'       },
+  { created: '2024-05-18T13:00:00Z', docId: 765, attachments: 5, type: 'Electronic', blNumber: 'CMAU2938471', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'pending-approval', goodsName: 'Potassium chloride',      vessel: 'MV ATLANTIC HAWK',   pol: 'Rotterdam',    pod: 'Buenos Aires', shipper: 'Nordic Agro Chemical',   buyer: 'Vistula Agro Trading',  description: 'Potash Standard Grade 60% K2O'        },
+  { created: '2024-05-22T15:00:00Z', docId: 432, attachments: 0, type: 'Electronic', blNumber: 'MSCU8374921', docStatus: 'pending-issuing', ownerAction: 'delegated',  approvalStatus: 'approved',         goodsName: 'Diammonium phosphate',    vessel: 'BV STELLAR CROWN',   pol: 'Santos',       pod: 'Hamburg',      shipper: 'Gulf Agrochem Ltd',      buyer: 'Baltic Crop Solutions', description: 'DAP Agricultural Grade 18-46'         },
+  { created: '2024-05-25T11:00:00Z', docId: 179, attachments: 2, type: 'Electronic', blNumber: 'MAEU5291837', docStatus: 'final-draft',     ownerAction: 'confirmed',  approvalStatus: 'approved',         goodsName: 'Liquid ammonia',          vessel: 'MT NORSE SPIRIT',    pol: 'Novorossiysk', pod: 'Karachi',      shipper: 'Baltic Fertilizers AS',  buyer: 'Delta Agro Investment',  description: 'Refrigerated Liquid Ammonia'          },
+];

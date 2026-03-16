@@ -97,6 +97,7 @@
   --primitive-red-500: #ef4444;
   --primitive-red-600: #dc2626;
   --primitive-red-700: #b91c1c;
+  --primitive-red-danger: #a80000;  /* Figma destructive menu item */
 
 
   /* ============================================
@@ -152,6 +153,24 @@
   --color-btn-brand-text:             #ffffff;
   --color-btn-brand-hover-from:       #0f6668;
   --color-btn-brand-hover-to:         #f7a529;
+
+  /* Tooltip */
+  --color-tooltip-bg:   #252e33;
+  --color-tooltip-text: #fafaf8;
+  --shadow-tooltip:     0px 4px 20px 0px rgba(1, 16, 20, 0.2);
+
+  /* Dropdown / context menu */
+  --color-dropdown-bg:            var(--primitive-neutral-0);
+  --color-dropdown-border:        #e1e2db;
+  --color-dropdown-item-text:     var(--primitive-olive-900);        /* #203209 */
+  --color-dropdown-item-hover-bg: rgba(82, 84, 52, 0.05);
+  --color-dropdown-item-danger:   var(--primitive-red-danger);       /* #a80000 */
+  --color-dropdown-divider:       #e1e2db;
+  --shadow-dropdown:              0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+
+  /* Icon badges (status icons in table cells) */
+  --color-icon-badge-neutral-bg:     rgba(128, 133, 60, 0.15);
+  --color-icon-badge-neutral-border: rgba(128, 133, 60, 0.15);
 
   /* --- Navigation --- */
   --color-nav-bg:              var(--primitive-olive-50);           /* #F2F3EE */
@@ -212,19 +231,22 @@
   /*  Note: selected category uses resting weight — only color changes, per spec */
 
   /* --- Doc Status badges (the pill labels in the Doc status column) ---
-     Each status has: bg, text, border (border is optional / can match bg).
-     All approximate — match against final design spec. */
-  --color-status-drafted-bg:         var(--primitive-blue-100);
-  --color-status-drafted-text:       var(--primitive-blue-700);
+     Each status has bg, border, and text — exact values from Figma. */
+  --color-status-drafted-bg:             #bdd7f0;
+  --color-status-drafted-border:         #83b4e2;
+  --color-status-drafted-text:           #153858;
 
-  --color-status-drafting-bg:        var(--primitive-slate-100);
-  --color-status-drafting-text:      var(--primitive-slate-600);
+  --color-status-final-draft-bg:         #bdf0e1;
+  --color-status-final-draft-border:     #a0d5c5;
+  --color-status-final-draft-text:       #164839;
 
-  --color-status-final-draft-bg:     var(--primitive-amber-100);
-  --color-status-final-draft-text:   var(--primitive-amber-700);
+  --color-status-drafting-bg:            #e3ebf2;
+  --color-status-drafting-border:        #cbdae7;
+  --color-status-drafting-text:          #29435a;
 
-  --color-status-pending-issuing-bg:   var(--primitive-orange-100);
-  --color-status-pending-issuing-text: var(--primitive-orange-600);
+  --color-status-pending-issuing-bg:     #fde4ad;
+  --color-status-pending-issuing-border: #eecc82;
+  --color-status-pending-issuing-text:   #533e12;
 
   /* --- Action Status (the icon + text combos in Owner action status columns) --- */
   --color-action-confirmed-icon:  var(--primitive-brand-600);   /* teal person+check icon */
@@ -246,6 +268,8 @@
 
   /* ---- Typography ---- */
   --font-family-sans: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-family-body: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
