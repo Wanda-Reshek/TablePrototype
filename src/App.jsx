@@ -1,10 +1,5 @@
-import AppShell from './components/shell/AppShell';
-import DataTableScreen from './components/table/DataTableScreen';
+import PrototypePage from './components/table/PrototypePage';
 
 export default function App() {
-  return (
-    <AppShell title="Data Table">
-      <DataTableScreen />
-    </AppShell>
-  );
+  return <PrototypePage />;
 }
