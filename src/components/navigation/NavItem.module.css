@@ -1,0 +1,46 @@
+.item {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  height: var(--nav-item-height);
+  padding-left: var(--nav-menuitem-padding-left);
+  padding-right: var(--nav-menuitem-padding-right);
+  border-radius: var(--nav-item-radius);
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);
+  font-weight: var(--nav-font-weight-resting);
+  line-height: var(--nav-line-height);
+  letter-spacing: var(--nav-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Color */
+  color: var(--color-nav-item-text);
+  background: transparent;
+
+  /* Interaction */
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--easing-default),
+    color var(--duration-fast) var(--easing-default),
+    font-weight var(--duration-fast) var(--easing-default);
+}
+
+.item:hover {
+  background: var(--color-nav-item-hover-bg);
+  color: var(--color-nav-item-hover-text);
+}
+
+.item.selected {
+  color: var(--color-nav-item-active-text);
+  font-weight: var(--nav-font-weight-selected);
+  background: transparent; /* bg is on the parent category, not the item */
+}
+
+.item.selected:hover {
+  background: var(--color-nav-item-hover-bg);
+}

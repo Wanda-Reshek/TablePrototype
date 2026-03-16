@@ -1,0 +1,32 @@
+/* ── Section wrapper ─────────────────────────────────────────────────────────
+   Groups SidebarEntry items. No intrinsic background or border.
+   ─────────────────────────────────────────────────────────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nav-item-gap, 0px);
+}
+
+/* Grows to fill remaining vertical space in a flex sidebar */
+.grow {
+  flex: 1;
+}
+
+/* ── Optional section label ──────────────────────────────────────────────────
+   Small-caps heading above a group of entries. Rarely used but handy.
+   ─────────────────────────────────────────────────────────────────────────── */
+.label {
+  display: block;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-nav-item-text);
+  opacity: 0.55;
+  padding:
+    var(--space-2)
+    var(--nav-category-padding-right)
+    var(--space-1)
+    var(--nav-category-padding-left);
+}

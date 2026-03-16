@@ -1,0 +1,334 @@
+.page {
+  padding: var(--space-8);
+  background: var(--color-surface-app);
+  min-height: 100vh;
+  font-family: var(--font-family-sans);
+  color: var(--color-text-primary);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-10);
+}
+
+.pageTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-2);
+}
+
+.pageDesc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  max-width: 580px;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ── Sections ── */
+.section {
+  margin-bottom: var(--space-12);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-heading);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-4);
+}
+
+.subsectionTitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Primitive palette ── */
+.paletteGroup {
+  margin-bottom: var(--space-4);
+}
+
+.paletteGroupLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.paletteRow {
+  display: flex;
+  gap: 4px;
+}
+
+.swatch {
+  flex: 1;
+  min-width: 0;
+}
+
+.swatchColor {
+  height: 48px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.swatchMeta {
+  padding-top: var(--space-1);
+}
+
+.swatchStep {
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+
+.swatchHex {
+  font-size: 9px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-family-mono);
+  line-height: 1.5;
+}
+
+/* ── Semantic swatches ── */
+.semanticGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--space-2);
+}
+
+.semanticSwatch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface-panel);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.semanticColor {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.semanticName {
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.semanticHex {
+  font-size: 9px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-family-mono);
+  margin-top: 1px;
+}
+
+.semanticDesc {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* ── Status badges ── */
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── Action statuses ── */
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding: var(--space-2) 0;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.actionIcon {
+  font-size: var(--font-size-md);
+  line-height: 1;
+}
+
+.actionLabel {
+  font-size: var(--font-size-sm);
+}
+
+/* ── Typography ── */
+.typeSamples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.typeSample {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+}
+
+.typeToken {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  color: var(--color-text-tertiary);
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+/* ── Spacing ── */
+.spacingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.spacingItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.spacingToken {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.spacingBar {
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-brand-subtle);
+  border: 1.5px solid var(--color-border-brand);
+  min-width: 4px;
+}
+
+/* ── Radius ── */
+.radiusList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  align-items: flex-end;
+}
+
+.radiusItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.radiusBox {
+  width: 72px;
+  height: 72px;
+  background: var(--color-surface-brand-subtle);
+  border: 2px solid var(--color-border-brand);
+}
+
+.radiusToken {
+  font-size: 10px;
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── Shadows ── */
+.shadowList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  padding: var(--space-6) 0;
+}
+
+.shadowCard {
+  width: 140px;
+  height: 88px;
+  background: var(--color-surface-panel);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shadowCardLabel {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+}
+
+/* ── Motion ── */
+.motionTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.motionTable th {
+  text-align: left;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 2px solid var(--color-border-subtle);
+}
+
+.motionTable td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+  vertical-align: top;
+}
+
+.motionTable td:first-child {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.motionTable td:nth-child(2) {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+}
+
+.motionTable td:last-child {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}

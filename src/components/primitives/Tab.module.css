@@ -1,0 +1,54 @@
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);           /* 4px between label and counter */
+  height: 32px;
+  padding: 7px;
+  border: 1px solid var(--color-tab-border);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);   /* 14px */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-tab-text);
+
+  transition:
+    background var(--duration-fast) var(--easing-default),
+    border-color var(--duration-fast) var(--easing-default),
+    color var(--duration-fast) var(--easing-default);
+}
+
+.tab:hover:not(.selected) {
+  background: var(--color-tab-hover-bg);
+}
+
+.tab.selected {
+  background: var(--color-tab-selected-bg);
+  border-color: var(--color-tab-selected-border);
+  color: var(--color-tab-selected-text);
+}
+
+/* ── Counter badge ── */
+.count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--space-1);     /* 0 4px */
+  border-radius: var(--radius-sm);
+  background: var(--color-tab-counter-bg);
+
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);   /* 12px */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-tab-counter-text);
+}

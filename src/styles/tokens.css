@@ -1,0 +1,317 @@
+/* ============================================
+   Design Tokens — Secro Prototype
+   ============================================
+   Structure:
+     1. PRIMITIVE PALETTE  — raw color values, no semantics.
+                             These are the "paint kit". Never use
+                             primitives directly in component CSS —
+                             always go through semantic tokens.
+
+     2. SEMANTIC TOKENS    — intent-driven aliases that map onto
+                             primitives. Component CSS should only
+                             reference tokens from this section.
+   ============================================ */
+
+:root {
+
+  /* ============================================
+     1. PRIMITIVE PALETTE
+     ============================================ */
+
+  /* --- Brand (teal/green — approximate, refine against final brand file) --- */
+  --primitive-brand-50:  #f0fdfa;
+  --primitive-brand-100: #ccfbf1;
+  --primitive-brand-200: #99f6e4;
+  --primitive-brand-300: #5eead4;
+  --primitive-brand-400: #2dd4bf;
+  --primitive-brand-500: #14b8a6;
+  --primitive-brand-600: #0d9488;  /* primary CTA, logo */
+  --primitive-brand-700: #0f766e;  /* hover state for CTA */
+  --primitive-brand-800: #115e59;
+  --primitive-brand-900: #134e4a;
+
+  /* --- Neutral (warm gray — warmer than pure gray, matches sidebar/bg tone) --- */
+  --primitive-neutral-0:   #ffffff;
+  --primitive-neutral-50:  #fafaf8;  /* warm near-white — main page background */
+  --primitive-neutral-100: #f5f5f4;  /* subtle tint for hover states */
+  --primitive-neutral-200: #e7e5e4;  /* borders, dividers */
+  --primitive-neutral-300: #d6d3d1;  /* stronger borders */
+  --primitive-neutral-400: #a8a29e;  /* placeholder text, icons */
+  --primitive-neutral-500: #78716c;  /* secondary text */
+  --primitive-neutral-600: #57534e;  /* body text */
+  --primitive-neutral-700: #44403c;  /* strong text */
+  --primitive-neutral-800: #292524;  /* headings */
+  --primitive-neutral-900: #1c1917;  /* near-black */
+
+  /* --- Green (success / Approved / Confirmed & signed) --- */
+  --primitive-green-50:  #f0fdf4;
+  --primitive-green-100: #dcfce7;
+  --primitive-green-500: #22c55e;
+  --primitive-green-600: #16a34a;
+  --primitive-green-700: #15803d;
+
+  /* --- Amber (warning / Pending confirmation / Pending approval) --- */
+  --primitive-amber-50:  #fffbeb;
+  --primitive-amber-100: #fef3c7;
+  --primitive-amber-400: #fbbf24;
+  --primitive-amber-500: #f59e0b;
+  --primitive-amber-600: #d97706;
+  --primitive-amber-700: #b45309;
+
+  /* --- Orange (Pending issuing badge) --- */
+  --primitive-orange-50:  #fff7ed;
+  --primitive-orange-100: #ffedd5;
+  --primitive-orange-400: #fb923c;
+  --primitive-orange-500: #f97316;
+  --primitive-orange-600: #ea580c;
+
+  /* --- Blue (Drafted badge / info states) --- */
+  --primitive-blue-50:  #eff6ff;
+  --primitive-blue-100: #dbeafe;
+  --primitive-blue-500: #3b82f6;
+  --primitive-blue-600: #2563eb;
+  --primitive-blue-700: #1d4ed8;
+
+  /* --- Slate (Drafting badge — slightly desaturated blue) --- */
+  --primitive-slate-50:  #f8fafc;
+  --primitive-slate-100: #f1f5f9;
+  --primitive-slate-200: #e2e8f0;
+  --primitive-slate-500: #64748b;
+  --primitive-slate-600: #475569;
+  --primitive-slate-700: #334155;
+
+  /* --- Teal (selected tab / selected state accent) --- */
+  --primitive-teal-900:   #014b4d;  /* selected tab text */
+  --primitive-teal-border: #9abbbb;  /* selected tab border */
+
+  /* --- Olive (navigation palette) --- */
+  --primitive-olive-50:  #f2f3ee;  /* nav background */
+  --primitive-olive-100: #e7e9dd;  /* selected nav item background */
+  --primitive-olive-500: #68695b;  /* unselected nav text & icon */
+  --primitive-olive-700: #525434;  /* hover base — use at 8% opacity */
+  --primitive-olive-900: #203209;  /* selected nav text & icon */
+
+  /* --- Red (error / destructive) --- */
+  --primitive-red-50:  #fef2f2;
+  --primitive-red-100: #fee2e2;
+  --primitive-red-500: #ef4444;
+  --primitive-red-600: #dc2626;
+  --primitive-red-700: #b91c1c;
+
+
+  /* ============================================
+     2. SEMANTIC TOKENS
+     ============================================
+     These are what component CSS should use.
+     Rename / retarget primitives here without
+     touching any component file.
+     ============================================ */
+
+  /* --- Surfaces (backgrounds) --- */
+  --color-surface-app:     var(--primitive-neutral-50);   /* main page bg — #FAFAF8 */
+  --color-surface-panel:   var(--primitive-neutral-0);    /* sidebar, card, modal bg */
+  --color-surface-overlay: var(--primitive-neutral-0);    /* dropdowns, popovers */
+  --color-surface-sunken:  var(--primitive-neutral-100);  /* input bg, code blocks */
+  --color-surface-brand:   var(--primitive-brand-600);    /* filled brand button bg */
+  --color-surface-brand-subtle: var(--primitive-brand-50); /* active nav item bg, selected rows */
+
+  /* --- Text --- */
+  --color-text-primary:    var(--primitive-neutral-800);  /* main body copy */
+  --color-text-secondary:  var(--primitive-neutral-500);  /* labels, meta, helper text */
+  --color-text-tertiary:   var(--primitive-neutral-400);  /* placeholders, disabled */
+  --color-text-heading:    var(--primitive-neutral-900);  /* page titles, column headers */
+  --color-text-on-brand:   var(--primitive-neutral-0);    /* text on brand-colored bg */
+  --color-text-brand:      var(--primitive-brand-700);    /* brand-colored text (active nav label) */
+  --color-text-link:       var(--primitive-brand-600);    /* inline links */
+
+  /* --- Borders & Dividers --- */
+  --color-border-subtle:   var(--primitive-neutral-200);  /* table row dividers, sidebar border */
+  --color-border-default:  var(--primitive-neutral-300);  /* input outlines, card borders */
+  --color-border-strong:   var(--primitive-neutral-400);  /* emphasized separators */
+  --color-border-brand:    var(--primitive-brand-600);    /* focused input, active tab underline */
+
+  /* --- Interactive (buttons, links, focus) --- */
+  --color-interactive-primary:        var(--primitive-brand-600);
+  --color-interactive-primary-hover:  var(--primitive-brand-700);
+  --color-interactive-secondary:      var(--primitive-neutral-0);       /* outlined button */
+  --color-interactive-secondary-border: var(--primitive-neutral-300);
+  --color-interactive-secondary-hover:  var(--primitive-neutral-100);
+  --color-interactive-ghost-hover:    var(--primitive-neutral-100);
+  --color-interactive-danger:         var(--primitive-red-600);
+  --color-interactive-danger-hover:   var(--primitive-red-700);
+  --color-focus-ring:                 var(--primitive-brand-500);
+
+  /* Secondary button */
+  --color-btn-secondary-bg:           var(--primitive-neutral-0);        /* white */
+  --color-btn-secondary-text:         var(--primitive-olive-900);         /* #203209 dark olive */
+  --color-btn-secondary-border:       rgba(104, 105, 91, 0.2);           /* olive alpha */
+  --color-btn-secondary-hover-bg:     rgba(82, 84, 52, 0.05);            /* subtle olive hover */
+
+  /* Brand CTA button */
+  --color-btn-brand-bg:               #0f6668;
+  --color-btn-brand-text:             #ffffff;
+  --color-btn-brand-hover-from:       #0f6668;
+  --color-btn-brand-hover-to:         #f7a529;
+
+  /* --- Navigation --- */
+  --color-nav-bg:              var(--primitive-olive-50);           /* #F2F3EE */
+  --color-nav-item-text:       var(--primitive-olive-500);          /* #68695B */
+  --color-nav-item-icon:       var(--primitive-olive-500);          /* #68695B */
+  --color-nav-item-hover-bg:   rgba(82, 84, 52, 0.08);             /* #525434 @ 8% */
+  --color-nav-item-hover-text: var(--primitive-olive-900);          /* #203209 */
+  --color-nav-item-active-bg:  var(--primitive-olive-100);          /* #E7E9DD */
+  --color-nav-item-active-text: var(--primitive-olive-900);         /* #203209 */
+  --color-nav-item-active-icon: var(--primitive-olive-900);         /* #203209 */
+  --color-nav-group-label:     var(--primitive-olive-500);          /* section headings */
+  --color-nav-border:          var(--primitive-neutral-200);        /* sidebar right border */
+  --color-nav-card-border:     rgba(104, 105, 91, 0.2);             /* org/user card outline */
+
+  /* --- Tabs --- */
+  --color-tab-text:             var(--primitive-olive-500);          /* #68695B unselected label */
+  --color-tab-border:           rgba(104, 105, 91, 0.2);             /* unselected tab border */
+  --color-tab-hover-bg:         rgba(82, 84, 52, 0.05);             /* subtle hover fill */
+  --color-tab-selected-bg:      rgba(1, 75, 77, 0.15);              /* selected tab fill */
+  --color-tab-selected-border:  var(--primitive-teal-border);        /* #9ABBBB */
+  --color-tab-selected-text:    var(--primitive-teal-900);           /* #014B4D */
+  --color-tab-counter-bg:       rgba(128, 133, 60, 0.15);           /* counter badge fill */
+  --color-tab-counter-text:     var(--primitive-olive-900);          /* #203209 */
+
+  /* --- Navigation Layout & Typography ---
+     Layout and type tokens specific to the sidebar nav structure.
+
+     Sidebar structure:
+       Category  — non-selectable, has icon + label. When its child page is
+                   active, the category bg and icon/text color change.
+       Menu item — the actual page link, nested under a category.
+                   When selected, text weight changes (not bg).
+  */
+
+  /* Sidebar shell */
+  --nav-inner-padding:           var(--space-2);           /* 8px all sides */
+
+  /* Shared item geometry */
+  --nav-item-height:             var(--space-10);          /* 40px */
+  --nav-item-gap:                0px;                      /* no gap between items in a group */
+  --nav-item-icon-gap:           var(--space-3);           /* 12px between icon and label */
+  --nav-item-radius:             var(--radius-lg);         /* 8px (matches --radius-lg) */
+
+  /* Category row padding (non-selectable group header) */
+  --nav-category-padding-left:   var(--space-3);           /* 12px */
+  --nav-category-padding-right:  var(--space-3);           /* 12px */
+
+  /* Menu item row padding (page link, indented) */
+  --nav-menuitem-padding-left:   var(--space-10);          /* 40px — visual indent under category */
+  --nav-menuitem-padding-right:  var(--space-4);           /* 16px */
+
+  /* Nav typography — Figma spec: 14px / 20px / -0.15px */
+  --nav-font-size:               var(--font-size-base);    /* 14px */
+  --nav-line-height:             var(--line-height-snug);  /* 1.4286 ≈ 20px / 14px */
+  --nav-letter-spacing:          var(--letter-spacing-tight); /* -0.15px */
+  --nav-font-weight-resting:     var(--font-weight-regular);  /* 400 — category & item resting */
+  --nav-font-weight-selected:    var(--font-weight-semibold); /* 600 — selected menu item only */
+  /*  Note: selected category uses resting weight — only color changes, per spec */
+
+  /* --- Doc Status badges (the pill labels in the Doc status column) ---
+     Each status has: bg, text, border (border is optional / can match bg).
+     All approximate — match against final design spec. */
+  --color-status-drafted-bg:         var(--primitive-blue-100);
+  --color-status-drafted-text:       var(--primitive-blue-700);
+
+  --color-status-drafting-bg:        var(--primitive-slate-100);
+  --color-status-drafting-text:      var(--primitive-slate-600);
+
+  --color-status-final-draft-bg:     var(--primitive-amber-100);
+  --color-status-final-draft-text:   var(--primitive-amber-700);
+
+  --color-status-pending-issuing-bg:   var(--primitive-orange-100);
+  --color-status-pending-issuing-text: var(--primitive-orange-600);
+
+  /* --- Action Status (the icon + text combos in Owner action status columns) --- */
+  --color-action-confirmed-icon:  var(--primitive-brand-600);   /* teal person+check icon */
+  --color-action-confirmed-text:  var(--primitive-brand-700);
+
+  --color-action-approved-icon:   var(--primitive-green-600);   /* green circled checkmark */
+  --color-action-approved-text:   var(--primitive-green-700);
+
+  --color-action-pending-icon:    var(--primitive-amber-500);   /* dashed orange circle */
+  --color-action-pending-text:    var(--primitive-neutral-600);
+
+  --color-action-delegated-icon:  var(--primitive-neutral-400); /* gray arrow */
+  --color-action-delegated-text:  var(--primitive-neutral-600);
+
+
+  /* ============================================
+     3. NON-COLOR TOKENS (typography, spacing, etc.)
+     ============================================ */
+
+  /* ---- Typography ---- */
+  --font-family-sans: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.8125rem;  /* 13px */
+  --font-size-base: 0.875rem; /* 14px */
+  --font-size-md: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.4286;   /* 20px / 14px — used in nav items */
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ---- Letter Spacing ---- */
+  --letter-spacing-tight:   -0.15px;  /* nav items, dense UI labels */
+  --letter-spacing-normal:   0px;
+  --letter-spacing-wide:     0.05em;  /* reserved for uppercase labels */
+
+  /* ---- Spacing ---- */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* ---- Radius ---- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+  /* ---- Motion ---- */
+  --duration-fast: 100ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ---- Layout ---- */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 56px;
+  --topbar-height: 48px;
+}

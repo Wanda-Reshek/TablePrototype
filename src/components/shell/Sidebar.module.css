@@ -1,0 +1,162 @@
+/* ── Sidebar wrapper (holds collapsed strip + popover/pinned panel) ────── */
+.sidebarWrapper {
+  position: relative;
+  flex-shrink: 0;
+  height: 100vh;
+  transition: width var(--duration-slow) var(--easing-default);
+}
+
+.wrapperCollapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.wrapperPinned {
+  width: var(--sidebar-width);
+}
+
+/* ── Sidebar container ─────────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--color-nav-bg);
+  border-right: 1px solid var(--color-nav-border);
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--nav-inner-padding);
+  padding-right: var(--nav-inner-padding);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* The always-visible collapsed strip */
+.collapsed {
+  width: var(--sidebar-collapsed-width);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* The expanding panel (popover or pinned) */
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: var(--sidebar-collapsed-width);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    width var(--duration-slow) var(--easing-default),
+    opacity 0ms var(--easing-default);
+}
+
+.panelVisible {
+  width: var(--sidebar-width);
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    width var(--duration-slow) var(--easing-default),
+    opacity 0ms var(--easing-default);
+}
+
+/* Popover: floats over content, has subtle shadow on the revealed edge */
+.panelPopover.panelVisible {
+  box-shadow: 4px 0 24px rgba(0,0,0,0.10);
+}
+
+/* ── Header: logo + org name ──────────────────────────────────────────────*/
+.header {
+  flex-shrink: 0;
+  padding-top: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Collapsed strip header: no right padding, logo only */
+.headerCollapsed {
+  padding-right: 0;
+}
+
+/* Panel header starts at 0 and grows with the width animation */
+.panel .header {
+  padding-right: 0;
+  transition: padding-right var(--duration-slow) var(--easing-default);
+}
+
+.panelVisible .header {
+  padding-right: 12px;
+}
+
+.logoImg {
+  height: 38px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Org name row — hidden in collapsed mode */
+.orgRow {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-nav-item-icon);
+  transition: color var(--duration-fast) var(--easing-default);
+}
+
+.orgRow:hover {
+  color: var(--color-nav-item-hover-text);
+}
+
+.orgName {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);
+  font-weight: var(--nav-font-weight-selected);
+  line-height: var(--nav-line-height);
+  letter-spacing: var(--nav-letter-spacing);
+  color: var(--color-nav-item-active-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+/* ── Scrollable body ──────────────────────────────────────────────────────*/
+.body {
+  flex: 1;
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nav-inner-padding);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Footer (non-scrolling) ───────────────────────────────────────────────*/
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--nav-inner-padding);
+}
+
+.footerDivider {
+  border-top: 1px solid var(--color-nav-border);
+  margin-bottom: var(--space-1);
+}

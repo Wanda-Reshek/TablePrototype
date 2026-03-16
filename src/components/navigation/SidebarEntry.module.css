@@ -1,0 +1,172 @@
+/* ── Wrapper ─────────────────────────────────────────────────────────────────
+   Wraps the header row + the collapsible items list.
+   Active state (has a selected child page) applies the bg to the whole block.
+   ─────────────────────────────────────────────────────────────────────────── */
+.entry {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--nav-item-radius);
+  overflow: hidden; /* clips items bg to the same radius */
+}
+
+.entry.active {
+  background: var(--color-nav-item-active-bg);
+}
+
+/* ── Header row ──────────────────────────────────────────────────────────────
+   The clickable accordion trigger. Always visible.
+   ─────────────────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  height: var(--nav-item-height);
+  padding-left: var(--nav-category-padding-left);
+  padding-right: var(--nav-category-padding-right);
+  gap: var(--nav-item-icon-gap);
+  border-radius: var(--nav-item-radius);
+  width: 100%;
+
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);
+  font-weight: var(--nav-font-weight-resting);
+  line-height: var(--nav-line-height);
+  letter-spacing: var(--nav-letter-spacing);
+  white-space: nowrap;
+
+  color: var(--color-nav-item-text);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--easing-default),
+    color var(--duration-fast) var(--easing-default);
+}
+
+.header:hover {
+  background: var(--color-nav-item-hover-bg);
+  color: var(--color-nav-item-hover-text);
+}
+
+/* Active: entry has a selected child — color changes, weight stays regular */
+.entry.active .header {
+  color: var(--color-nav-item-active-text);
+}
+
+/* Suppress duplicate hover bg when the entry wrapper already has active bg */
+.entry.active .header:hover {
+  background: var(--color-nav-item-hover-bg);
+}
+
+/* ── Icon ────────────────────────────────────────────────────────────────────
+   20×20 wrapper, inherits color from .header so it responds to active/hover.
+   ─────────────────────────────────────────────────────────────────────────── */
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-nav-item-icon);
+  transition: color var(--duration-fast) var(--easing-default);
+}
+
+.header:hover .icon {
+  color: var(--color-nav-item-hover-text);
+}
+
+.entry.active .icon {
+  color: var(--color-nav-item-active-icon);
+}
+
+/* ── Label ───────────────────────────────────────────────────────────────────
+   Takes up remaining space, hidden when sidebar is collapsed.
+   ─────────────────────────────────────────────────────────────────────────── */
+.label {
+  flex: 1;
+  min-width: 0;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition:
+    opacity var(--duration-slow) var(--easing-default),
+    max-width var(--duration-slow) var(--easing-default);
+}
+
+.labelHidden {
+  opacity: 0;
+  max-width: 0;
+}
+
+/* ── Chevron ─────────────────────────────────────────────────────────────────
+   Rotates to indicate open/closed state. Hidden when sidebar is collapsed.
+   ─────────────────────────────────────────────────────────────────────────── */
+.chevron {
+  flex-shrink: 0;
+  max-width: 16px;
+  overflow: hidden;
+  opacity: 1;
+  color: var(--color-nav-item-icon);
+  transition:
+    transform var(--duration-base) var(--easing-default),
+    color var(--duration-fast) var(--easing-default),
+    opacity var(--duration-slow) var(--easing-default),
+    max-width var(--duration-slow) var(--easing-default);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.chevronHidden {
+  opacity: 0;
+  max-width: 0;
+}
+
+.header:hover .chevron {
+  color: var(--color-nav-item-hover-text);
+}
+
+.entry.active .chevron {
+  color: var(--color-nav-item-active-icon);
+}
+
+/* ── Collapsed icon indicator ────────────────────────────────────────────────
+   When the sidebar is collapsed, the icon gets a bg pill to show active state.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* No centering override needed — icon stays at its natural padding-left
+   throughout the collapse animation and in collapsed state. */
+
+.activeIconPill {
+  display: none;
+}
+
+.entry.active.sidebarCollapsed .activeIconPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--nav-item-radius);
+  background: var(--color-nav-item-active-bg);
+}
+
+/* ── Items list ──────────────────────────────────────────────────────────────
+   Collapsible section. Uses max-height animation for a smooth transition.
+   ─────────────────────────────────────────────────────────────────────────── */
+.items {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--duration-slow) var(--easing-default);
+}
+
+.itemsOpen {
+  max-height: 400px; /* enough for ~8 items; adjust if needed */
+}
+
+.itemsHidden {
+  display: none;
+}

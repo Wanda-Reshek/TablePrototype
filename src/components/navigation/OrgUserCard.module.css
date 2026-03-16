@@ -1,0 +1,78 @@
+/* ── Card wrapper (button) ───────────────────────────────────────────────── */
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-item-icon-gap);       /* 12px — matches SidebarEntry icon gap */
+  width: 100%;
+  padding: var(--space-3);             /* 12px all sides — from Figma */
+  border: 1px solid var(--color-nav-card-border);
+  border-radius: var(--radius-2xl);   /* 16px */
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--easing-default);
+}
+
+.card:hover {
+  background: var(--color-nav-item-hover-bg);  /* same as NavItem hover */
+}
+
+/* ── Avatar ──────────────────────────────────────────────────────────────── */
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);     /* 14px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  letter-spacing: var(--nav-letter-spacing);
+  color: #fff;
+}
+
+/* ── Text block ──────────────────────────────────────────────────────────── */
+.text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;                        /* allows ellipsis to work */
+}
+
+.orgName {
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);
+  font-weight: var(--nav-font-weight-selected);  /* 600 — semibold */
+  line-height: var(--nav-line-height);
+  letter-spacing: var(--nav-letter-spacing);
+  color: var(--color-nav-item-active-text);      /* #203209 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userName {
+  font-family: var(--font-family-sans);
+  font-size: var(--nav-font-size);
+  font-weight: var(--nav-font-weight-resting);   /* 400 */
+  line-height: var(--nav-line-height);
+  letter-spacing: var(--nav-letter-spacing);
+  color: var(--color-nav-item-text);             /* #68695B */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Chevron ─────────────────────────────────────────────────────────────── */
+.chevron {
+  flex-shrink: 0;
+  color: var(--color-nav-item-icon);
+}
+
+.card:hover .chevron {
+  color: var(--color-nav-item-hover-text);
+}
