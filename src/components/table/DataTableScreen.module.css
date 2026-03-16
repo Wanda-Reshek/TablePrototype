@@ -112,14 +112,18 @@
   max-width: 240px;
 }
 
-.paginationRow {
+/* Spacer column — reserves right-edge room without squeezing data columns */
+.thSpacer {
   position: sticky;
-  left: 0;
+  top: 0;
+  z-index: 10;
+  background: #f2f3ec;
+  border-bottom: 1px solid rgba(104, 105, 91, 0.15);
+  padding: 0;
 }
 
-/* Reserve 160px at the right edge of the table for the actions overlay */
-.tr > td:nth-last-child(2) {
-  padding-right: 160px;
+.tdSpacer {
+  padding: 0;
 }
 
 /* ── Actions column cell ──────────────────────────────────────── */

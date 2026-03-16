@@ -94,5 +94,12 @@
 
 /* ── Table area ─────────────────────────────────────────── */
 .tableArea {
-  padding: 16px 24px 24px;
+  padding: 16px 24px 0;
+}
+
+/* ── Pagination bar ─────────────────────────────────────── */
+.paginationBar {
+  position: sticky;
+  left: 0;
+  padding: 16px 16px 24px 24px;
 }

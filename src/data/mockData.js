@@ -44,6 +44,10 @@ export const mockColumns = [
   { id: 'buyer',       header: 'Buyer',                 accessorKey: 'buyer',       size: 139, minSize: 80  },
   { id: 'description', header: 'Description of goods',  accessorKey: 'description', size: 188, minSize: 100 },
   {
+    id: '_spacer', header: '', accessorKey: '_spacer',
+    enableSorting: false, enableResizing: false, size: 160,
+  },
+  {
     id: '_actions', header: '', accessorKey: 'blNumber',
     enableSorting: false, enableResizing: false, size: 0,
     cell: ({ row }) => createElement(RowActionsCell, { row }),

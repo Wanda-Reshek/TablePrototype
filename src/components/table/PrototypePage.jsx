@@ -3,6 +3,8 @@ import Sidebar from '../shell/Sidebar';
 import DataTableScreen from './DataTableScreen';
 import Button from '../primitives/Button';
 import TabGroup from '../primitives/TabGroup';
+import Pagination from '../primitives/Pagination';
+import { mockData } from '../../data/mockData';
 import styles from './PrototypePage.module.css';
 import columnIcon from '../../Icons/column.svg';
 import helpIcon from '../../Icons/Sidebar_Icons/Help.svg';
@@ -24,6 +26,7 @@ const TABS = [
 
 export default function PrototypePage() {
   const [pinned, setPinned] = useState(true);
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 50 });
 
   return (
     <div className={`${styles.shell} ${pinned ? styles.sidebarPinned : ''}`}>
@@ -60,7 +63,23 @@ export default function PrototypePage() {
 
         {/* ── Table ── */}
         <div className={styles.tableArea}>
-          <DataTableScreen showToolbar={false} />
+          <DataTableScreen
+            showToolbar={false}
+            paginationState={pagination}
+            onPaginationChange={setPagination}
+          />
+        </div>
+
+        {/* ── Pagination ── */}
+        <div className={styles.paginationBar}>
+          <Pagination
+            page={pagination.pageIndex + 1}
+            pageSize={pagination.pageSize}
+            total={mockData.length}
+            pageSizes={[25, 50, 100]}
+            onPageChange={(p) => setPagination((prev) => ({ ...prev, pageIndex: p - 1 }))}
+            onPageSizeChange={(s) => setPagination({ pageIndex: 0, pageSize: s })}
+          />
         </div>
       </div>
     </div>

@@ -9,15 +9,16 @@ import {
 } from '@tanstack/react-table';
 import { mockData, mockColumns } from '../../data/mockData';
 import Button from '../primitives/Button';
-import Pagination from '../primitives/Pagination';
 import ColumnHeaderMenu from './ColumnHeaderMenu';
 import ColumnHeader from './ColumnHeader';
 import styles from './DataTableScreen.module.css';
 
-export default function DataTableScreen({ showToolbar = true }) {
+export default function DataTableScreen({ showToolbar = true, paginationState, onPaginationChange }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
-  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 50 });
+  const [internalPagination, setInternalPagination] = useState({ pageIndex: 0, pageSize: 50 });
+  const pagination = paginationState ?? internalPagination;
+  const setPagination = onPaginationChange ?? setInternalPagination;
   const [columnSizing, setColumnSizing] = useState({});
   const [openMenu, setOpenMenu] = useState(null); // { columnId, anchorEl }
 
@@ -60,13 +61,14 @@ export default function DataTableScreen({ showToolbar = true }) {
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const isActions = header.column.id === '_actions';
+                  const isSpacer  = header.column.id === '_spacer';
                   return (
                     <th
                       key={header.id}
-                      className={isActions ? styles.thActions : styles.th}
-                      style={isActions ? undefined : { width: header.getSize() }}
+                      className={isActions ? styles.thActions : isSpacer ? styles.thSpacer : styles.th}
+                      style={(isActions || isSpacer) ? { width: header.getSize() } : { width: header.getSize() }}
                     >
-                      {!isActions && (
+                      {!isActions && !isSpacer && (
                         <>
                           <ColumnHeader
                             label={flexRender(header.column.columnDef.header, header.getContext())}
@@ -98,20 +100,19 @@ export default function DataTableScreen({ showToolbar = true }) {
               <tr key={row.id} className={styles.tr}>
                 {row.getVisibleCells().map((cell) => {
                   const isActions = cell.column.id === '_actions';
+                  const isSpacer  = cell.column.id === '_spacer';
                   return (
                     <td
                       key={cell.id}
-                      className={isActions ? styles.tdActions : styles.td}
-                      style={isActions ? undefined : { width: cell.column.getSize() }}
+                      className={isActions ? styles.tdActions : isSpacer ? styles.tdSpacer : styles.td}
+                      style={{ width: cell.column.getSize() }}
                     >
-                      {isActions
-                        ? (
-                          <div className={styles.actionsOverlay}>
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                          </div>
-                        )
-                        : flexRender(cell.column.columnDef.cell, cell.getContext())
-                      }
+                      {isActions && (
+                        <div className={styles.actionsOverlay}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </div>
+                      )}
+                      {!isActions && !isSpacer && flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   );
                 })}
@@ -130,17 +131,6 @@ export default function DataTableScreen({ showToolbar = true }) {
         />
       )}
 
-      {/* Pagination */}
-      <div className={styles.paginationRow}>
-        <Pagination
-          page={pagination.pageIndex + 1}
-          pageSize={pagination.pageSize}
-          total={mockData.length}
-          pageSizes={[25, 50, 100]}
-          onPageChange={(p) => setPagination((prev) => ({ ...prev, pageIndex: p - 1 }))}
-          onPageSizeChange={(s) => setPagination({ pageIndex: 0, pageSize: s })}
-        />
-      </div>
     </div>
   );
 }
