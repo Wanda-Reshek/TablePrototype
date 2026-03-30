@@ -3,3 +3,6 @@ dist
 storybook-static
 *.local
 .DS_Store
+
+# Local Netlify folder
+.netlify
