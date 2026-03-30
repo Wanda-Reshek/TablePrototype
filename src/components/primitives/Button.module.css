@@ -90,9 +90,7 @@
   background: #b91c1c;
 }
 
-/* Brand CTA — solid teal that cross-fades to teal→amber gradient on hover.
-   CSS cannot animate background-image directly, so a ::before pseudo-element
-   holds the gradient at opacity:0 and fades in on hover. */
+/* Brand CTA — solid teal with 10% lighter hover state */
 .brand {
   height: 36px;
   padding: 0 var(--space-4) 0 var(--space-3); /* 16px right, 12px left */
@@ -102,22 +100,8 @@
   border-radius: var(--radius-lg);
 }
 
-.brand::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    92deg,
-    var(--color-btn-brand-hover-from) 0%,
-    var(--color-btn-brand-hover-to) 100%
-  );
-  opacity: 0;
-  transition: opacity var(--duration-base) var(--easing-default);
-}
-
-.brand:hover::before {
-  opacity: 1;
+.brand:hover {
+  background: var(--color-btn-brand-hover-bg);
 }
 
 /* --- Disabled --- */

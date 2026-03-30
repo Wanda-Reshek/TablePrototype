@@ -10,7 +10,7 @@ import {
   InventoryFinanceIcon,
   ClausesLibraryIcon,
   CustomsNotificationsIcon,
-  InviteToSecroIcon,
+  InviteIcon,
   SupportIcon,
   CollapseSidebarIcon,
   ExpandSidebarIcon,
@@ -77,7 +77,7 @@ export const UtilitySection = {
   render: () => (
     <div style={{ width: '240px' }}>
       <SidebarSection>
-        <SidebarEntry icon={<InviteToSecroIcon />} label="Invite to Secro" onClick={() => {}} />
+        <SidebarEntry icon={<InviteIcon />} label="Invite" onClick={() => {}} />
         <SidebarEntry icon={<SupportIcon />} label="Support" onClick={() => {}} />
       </SidebarSection>
     </div>
@@ -194,8 +194,8 @@ export const FullSidebar = {
         {/* ── Section 2: Utility ── */}
         <SidebarSection>
           <SidebarEntry
-            icon={<InviteToSecroIcon />}
-            label="Invite to Secro"
+            icon={<InviteIcon />}
+            label="Invite"
             sidebarCollapsed={sidebarCollapsed}
             onClick={() => {}}
           />

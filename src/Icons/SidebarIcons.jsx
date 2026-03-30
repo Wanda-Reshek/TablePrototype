@@ -224,7 +224,7 @@ export function CustomsNotificationsIcon() {
   );
 }
 
-export function InviteToSecroIcon() {
+export function InviteIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path

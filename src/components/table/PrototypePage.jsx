@@ -32,8 +32,8 @@ export default function PrototypePage() {
     <div className={`${styles.shell} ${pinned ? styles.sidebarPinned : ''}`}>
       <Sidebar
         pinned={pinned}
-        orgName="North Chemical"
-        activeNavItem="BIMCO eBL Congenbill"
+        orgName="Sterling Capital"
+        activeNavItem="Execution Reports"
         onPin={() => setPinned(true)}
         onCollapse={() => setPinned(false)}
       />
@@ -41,7 +41,7 @@ export default function PrototypePage() {
       <div className={styles.main}>
         {/* ── Page header ── */}
         <div className={styles.pageHeader}>
-          <h1 className={styles.pageTitle}>BIMCO eBL Congenbill</h1>
+          <h1 className={styles.pageTitle}>Execution Reports</h1>
           <div className={styles.headerActions}>
             <button className={styles.helpBtn} aria-label="Help">
               <img src={helpIcon} width={20} height={20} alt="" aria-hidden="true" />

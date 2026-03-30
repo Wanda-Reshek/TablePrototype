@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build && npm run build-storybook"
-  publish = "dist"
+  command = "npm run build-storybook"
+  publish = "dist/storybook"
 
 [[redirects]]
   from = "/storybook/*"

@@ -1,5 +1,5 @@
 /* ============================================
-   Design Tokens — Secro Prototype
+   Design Tokens — Prototype
    ============================================
    Structure:
      1. PRIMITIVE PALETTE  — raw color values, no semantics.
@@ -151,6 +151,7 @@
   /* Brand CTA button */
   --color-btn-brand-bg:               #0f6668;
   --color-btn-brand-text:             #ffffff;
+  --color-btn-brand-hover-bg:         #1a8b8e;  /* 10% lighter */
   --color-btn-brand-hover-from:       #0f6668;
   --color-btn-brand-hover-to:         #f7a529;
 
@@ -215,7 +216,7 @@
   --nav-item-radius:             var(--radius-lg);         /* 8px (matches --radius-lg) */
 
   /* Category row padding (non-selectable group header) */
-  --nav-category-padding-left:   var(--space-3);           /* 12px */
+  --nav-category-padding-left:   10px;                     /* 10px */
   --nav-category-padding-right:  var(--space-3);           /* 12px */
 
   /* Menu item row padding (page link, indented) */

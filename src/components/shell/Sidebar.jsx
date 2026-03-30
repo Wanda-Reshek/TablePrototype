@@ -16,27 +16,27 @@ import {
   ExpandSidebarIcon,
 } from '../../Icons/SidebarIcons';
 
-const TRANSPORT_ITEMS = [
-  'BIMCO eBL Congenbill',
-  'ASBA Nograin BL 1989 UK',
-  'Private Documents',
-  "Private Mate's Receipt",
+const TRADE_ITEMS = [
+  'Trade Confirmations',
+  'Execution Reports',
+  'Settlement Instructions',
+  'Allocation Notices',
 ];
 
 // Static counts shown next to specific nav items
 const NAV_COUNTS = {
-  'BIMCO eBL Congenbill': 17,
-  "Private Mate's Receipt": 2,
+  'Trade Confirmations': 28,
+  'Execution Reports': 15,
 };
 
-const RISK_ITEMS = [
-  'LOI no BL at POD',
-  'E-Letter of Authority',
+const COMPLIANCE_ITEMS = [
+  'Regulatory Reports',
+  'Trade Blotter',
 ];
 
-const INVENTORY_ITEMS = [
-  'LME eWarrant',
-  'Warehouse Receipt',
+const AGREEMENTS_ITEMS = [
+  'ISDA Agreements',
+  'Counterparty Terms',
 ];
 
 function SwitchIcon() {
@@ -49,33 +49,33 @@ function SwitchIcon() {
 
 /** Shared nav content — used in both the collapsed strip and the expanded panel */
 function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse, activeNavItem }) {
-  const transportActive = TRANSPORT_ITEMS.includes(activeNavItem);
+  const tradeActive = TRADE_ITEMS.includes(activeNavItem);
   return (
     <>
       <div className={styles.body}>
         <SidebarSection grow>
-          <SidebarEntry icon={<CommercialContractsIcon />} label="Commercial Contracts" sidebarCollapsed={sidebarCollapsed}>
-            <NavItem label="Contract e-signature" />
+          <SidebarEntry icon={<CommercialContractsIcon />} label="Dashboard" sidebarCollapsed={sidebarCollapsed}>
+            <NavItem label="Trading Overview" />
           </SidebarEntry>
-          <SidebarEntry icon={<IntegrationsIcon />} label="Integrations" sidebarCollapsed={sidebarCollapsed}>
-            <NavItem label="Bookings" />
+          <SidebarEntry icon={<IntegrationsIcon />} label="Order Management" sidebarCollapsed={sidebarCollapsed}>
+            <NavItem label="Active Orders" />
           </SidebarEntry>
-          <SidebarEntry icon={<TransportDocumentsIcon />} label="Transport Documents"
-            active={transportActive}
-            defaultExpanded={transportActive}
+          <SidebarEntry icon={<TransportDocumentsIcon />} label="Trade Documents"
+            active={tradeActive}
+            defaultExpanded={tradeActive}
             sidebarCollapsed={sidebarCollapsed}>
-            {TRANSPORT_ITEMS.map((l) => (
+            {TRADE_ITEMS.map((l) => (
               <NavItem key={l} label={l} selected={l === activeNavItem} count={NAV_COUNTS[l]} />
             ))}
           </SidebarEntry>
-          <SidebarEntry icon={<RiskManagementIcon />} label="Risk Management" sidebarCollapsed={sidebarCollapsed}>
-            {RISK_ITEMS.map((l) => <NavItem key={l} label={l} />)}
+          <SidebarEntry icon={<RiskManagementIcon />} label="Compliance" sidebarCollapsed={sidebarCollapsed}>
+            {COMPLIANCE_ITEMS.map((l) => <NavItem key={l} label={l} />)}
           </SidebarEntry>
-          <SidebarEntry icon={<InventoryFinanceIcon />} label="Inventory Finance" sidebarCollapsed={sidebarCollapsed}>
-            {INVENTORY_ITEMS.map((l) => <NavItem key={l} label={l} />)}
+          <SidebarEntry icon={<InventoryFinanceIcon />} label="Agreements" sidebarCollapsed={sidebarCollapsed}>
+            {AGREEMENTS_ITEMS.map((l) => <NavItem key={l} label={l} />)}
           </SidebarEntry>
-          <SidebarEntry icon={<ClausesLibraryIcon />} label="Clauses Library" sidebarCollapsed={sidebarCollapsed} />
-          <SidebarEntry icon={<CustomsNotificationsIcon />} label="Customs Notifications" sidebarCollapsed={sidebarCollapsed} />
+          <SidebarEntry icon={<ClausesLibraryIcon />} label="Term Sheets" sidebarCollapsed={sidebarCollapsed} />
+          <SidebarEntry icon={<CustomsNotificationsIcon />} label="Notifications" sidebarCollapsed={sidebarCollapsed} />
         </SidebarSection>
       </div>
 
@@ -101,7 +101,7 @@ function NavContent({ sidebarCollapsed, pinned, onPin, onCollapse, activeNavItem
   );
 }
 
-export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Chemicals', activeNavItem }) {
+export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'Sterling Capital', activeNavItem }) {
   const [hovered, setHovered] = useState(false);
   const popoverVisible = !pinned && hovered;
 
@@ -114,7 +114,7 @@ export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Ch
       {/* ── Collapsed strip: always in layout flow, icons only ── */}
       <aside className={`${styles.sidebar} ${styles.collapsed}`}>
         <div className={`${styles.header} ${styles.headerCollapsed}`}>
-          <img src={logoCollapsed} alt="Secro" className={styles.logoImg} draggable={false} />
+          <img src={logoCollapsed} alt="" className={styles.logoImg} draggable={false} />
         </div>
         <NavContent sidebarCollapsed={true} pinned={pinned} onPin={onPin} onCollapse={onCollapse} activeNavItem={activeNavItem} />
       </aside>
@@ -130,7 +130,7 @@ export default function Sidebar({ pinned, onPin, onCollapse, orgName = 'North Ch
         aria-hidden={!pinned && !popoverVisible}
       >
         <div className={styles.header}>
-          <img src={logoCollapsed} alt="Secro" className={styles.logoImg} draggable={false} />
+          <img src={logoCollapsed} alt="" className={styles.logoImg} draggable={false} />
           <button className={styles.orgRow} type="button">
             <span className={styles.orgName}>{orgName}</span>
             <SwitchIcon />

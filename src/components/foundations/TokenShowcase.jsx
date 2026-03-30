@@ -292,7 +292,7 @@ export default function TokenShowcase() {
       <div className={styles.header}>
         <h1 className={styles.pageTitle}>Design Tokens</h1>
         <p className={styles.pageDesc}>
-          All design primitives and semantic aliases for the Secro prototype.
+          All design primitives and semantic aliases for the prototype.
           Primitives are raw values — the paint kit.
           Semantic tokens express intent and are the only ones component CSS should reference.
           Hex values are read live from the CSS file.
