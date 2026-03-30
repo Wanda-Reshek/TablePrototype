@@ -23,7 +23,6 @@ export const mockColumns = [
     },
   },
   { id: 'type',     header: 'Type',      accessorKey: 'type',     size: 100,  minSize: 80 },
-  { id: 'tradeId', header: 'Trade ID', accessorKey: 'tradeId', size: 139, minSize: 100 },
   {
     id: 'docStatus', header: 'Execution status', accessorKey: 'docStatus', size: 158, minSize: 120,
     cell: ({ getValue }) => createElement(Badge, { variant: getValue() }),
